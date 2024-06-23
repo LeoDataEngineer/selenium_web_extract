@@ -23,7 +23,7 @@ def extract_text(id, url, by_type, identifier):
 
     # Iniciar el navegador
     driver = webdriver.Chrome(service=service, options=chrome_options)
-    
+
     try:
         # Navegar a la página web
         print(f"Navegando a la URL: {url}")
@@ -31,17 +31,16 @@ def extract_text(id, url, by_type, identifier):
         
         # Hacer scroll hacia abajo para cargar el contenido si es necesario
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(3)
+        time.sleep(2)
         
         # Esperar hasta que el contenedor de los productos esté presente
         wait = WebDriverWait(driver, 10)  # Incrementar el tiempo de espera
         print(f"Esperando el elemento con {by_type} y {identifier}")
-        wait.until(EC.presence_of_element_located((by_type, identifier)))
+        element = wait.until(EC.presence_of_element_located((by_type, identifier)))
 
         # Extraer datos utilizando el tipo de localización y el identificador proporcionado
-        element = driver.find_element(by_type, identifier)
         print(f"Elemento encontrado: {element}")
-        
+
         # Obtener el texto del elemento
         text = element.text
         print(f"Texto encontrado para {id}: {text}")
@@ -50,10 +49,14 @@ def extract_text(id, url, by_type, identifier):
         return text_name
     except Exception as e:
         print(f"Error al extraer texto para {id} con URL {url}: {e}")
+        with open(f"error_{id}.html", "w") as f:
+            f.write(driver.page_source)
         return None
     finally:
         # Asegurarse de que el navegador se cierra
         driver.quit()
+
+# Rest of the code remains the same
 
 
 columnas = ['id', 'Empresa', 'producto', 'link', 'xpath']
