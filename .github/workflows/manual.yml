@@ -47,7 +47,8 @@ jobs:
             - name: Download users data from Extract Job
               uses: actions/download-artifact@v4
               with:
-                name:  enviar tabla productos a aiven 
+                name: productos
+            
             - name: Subir datos a mysql
               run: python load.py
               env:
