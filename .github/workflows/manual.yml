@@ -27,9 +27,9 @@ jobs:
         run: |
           mkdir -p data_set
           python main.py
-      - name: Move data_snow.csv to data_snow directory
+      - name: Move productos.csv to data_set directory
         run: |
-          mv producto.csv data_snow/
+          mv productos.csv data_set/
           
       # - name: Subir datos
       #   uses: actions/upload-artifact@v4
