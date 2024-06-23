@@ -25,11 +25,11 @@ jobs:
       
       - name: Ejecutar script de extracción
         run: |
-          mkdir -p data_set
+          mkdir -p data
           python main.py
-      - name: Move productos.csv to data_set directory
+      - name: Move productos.csv to data directory
         run: |
-          mv productos.csv data_set/
+          mv productos.csv data/
           
       # - name: Subir datos
       #   uses: actions/upload-artifact@v4
