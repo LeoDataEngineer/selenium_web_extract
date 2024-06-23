@@ -34,7 +34,7 @@ def extract_text(id, url, by_type, identifier):
         time.sleep(2)
         
         # Esperar hasta que el contenedor de los productos esté presente
-        wait = WebDriverWait(driver, 10)  # Incrementar el tiempo de espera
+        wait = WebDriverWait(driver, 5)  # Incrementar el tiempo de espera
         print(f"Esperando el elemento con {by_type} y {identifier}")
         element = wait.until(EC.presence_of_element_located((by_type, identifier)))
 
