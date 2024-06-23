@@ -107,6 +107,8 @@ def clean_price(price):
 # Aplicar la función al DataFrame
 df_final['precio'] = df_final['precio'].apply(clean_price)
 df_final['id'] = df_final['id'].astype(int)
+
+df_final.to_csv('productos.csv', index=False)
 print(df_final)
 
 
