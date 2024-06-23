@@ -62,10 +62,10 @@ def extract_text(id, url, by_type, identifier):
 columnas = ['id', 'Empresa', 'producto', 'link', 'xpath']
 
 links_product = [
-    ['1', 'Jumbo', 'azucar', 'https://www.jumbo.com.ar/azucar/azucar-y-edulcorantes?map=ft,sub-categoria', '//*[@id="gallery-layout-container"]/div[2]/section/a/article/div[5]/div/div/div/div[1]/div/span/div/div'],
-    ['2', 'Jumbo', 'arroz', 'https://www.jumbo.com.ar/arroz/arroz?map=ft,sub-categoria', '//*[@id="gallery-layout-container"]/div[17]/section/a/article/div[5]/div/div/div/div[1]/div/span/div/div'],
-    ['3', 'Coto', 'azucar','https://www.cotodigital3.com.ar/sitios/cdigi/browse/catalogo-almac%C3%A9n-endulzantes-az%C3%BAcar/_/N-1w1x9xa', '/html/body/div[5]/div[2]/div/div/div[3]/div/div[1]/ul/li[6]/div[2]/div[1]/div[1]/span/span'],
-    ['4', 'disco', 'azucar', 'https://www.disco.com.ar/azucar?_q=azucar&map=ft', '/html/body/div[2]/div/div[1]/div/div[10]/div/div[2]/section/div[2]/div/div[4]/section/div/div/div/div/div[2]/div/div[3]/div/div/div/div/div[3]/section/a/article/div[5]/div/div/div/div[1]/div/span/div/div']
+    ['1','Jumbo','azucar', 'https://www.jumbo.com.ar/azucar/azucar-y-edulcorantes?map=ft,sub-categoria', '//*[@id="gallery-layout-container"]/div[2]/section/a/article/div[5]/div/div/div/div[1]/div/span/div/div'],
+    ['2', 'Coto', 'azucar','https://www.cotodigital3.com.ar/sitios/cdigi/browse/catalogo-almac%C3%A9n-endulzantes-az%C3%BAcar/_/N-1w1x9xa', '//*[@id="divProductAddCart_sku00298412"]/div[1]/span/span'],
+    ['3', 'Dia', 'azucar', 'https://diaonline.supermercadosdia.com.ar/az%C3%BAcares?_q=az%C3%BAcares&map=ft', '/html/body/div[2]/div/div[1]/div/div[3]/div/div/section/div[2]/div/div[3]/section/div/div[3]/div/div[3]/div/div/div/div/div[5]/section/a/article/div/div/div[5]/div/div/div[1]/span/span/span'],
+    ['4', 'Carrefour', 'azucar', 'https://www.carrefour.com.ar/Desayuno-y-merienda/Azucar-y-endulzantes/Azucar?order=', '/html/body/div[3]/div/div[1]/div/div[5]/div/div/section/div[2]/div/div[3]/div/div[2]/div/div[3]/div/div/div/div[2]/div[2]/section/a/article/div/div[10]/div/div/div/div[1]/span/span/span[1]/span[3]']
 ]
 info = pd.DataFrame(links_product, columns=columnas)
 info
