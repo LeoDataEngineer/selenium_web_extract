@@ -25,49 +25,20 @@ jobs:
       
       - name: Ejecutar script de extracción
         run: |
-          mkdir -p data
           python main.py
-      - name: Move productos.csv to data directory
+
+      - name: Mover productos.csv al directorio data
         run: |
           mv productos.csv data/
-          
-      # - name: Subir datos
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: productos
-      #     path: productos.csv
 
-  # read_save_repo:
-  #     runs-on: ubuntu-latest
-  #     needs: extract
-  #     steps:
-  #       - uses: actions/checkout@v4
-  #       - uses: actions/setup-python@v5
-  #         with:
-  #           python-version: '3.10'
-  #           cache: 'pip' # caching pip dependencies
-  #       - run: pip install -r requirements.txt
-  #       # Paso para descargar el artefacto
-  #       - name: Download artifact
-  #         uses: actions/download-artifact@v4
-  #         with:
-  #           name: productos
-  #           path: productos
-  
-  #       # Paso para agregar y subir el archivo CSV al repositorio
-  #       - name: Add and commit CSV file
-  #         run: |-
-  #           git config user.name "Automated"
-  #           git config user.email "actions@users.noreply.github.com"
-  #           git add productos
-  #           git commit -m "Add productos.csv"
-  #           timestamp=$(date -u)
-  #           git diff --quiet && git diff --cached --quiet || git commit -m "Latest data: ${timestamp}" && git push origin main
-  #         #   git config --local user.email "action@github.com"
-  #         #   git config --local user.name "Automated"
-  #         #   git add data_snow
-  #         #   git commit -m "Add data_snow.csv"
-  #         #   git push origin HEAD:main
+      - name: Subir productos.csv al repositorio
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/productos.csv
+          git commit -m 'Agregar productos.csv'
+          git push
+
 
                  
 
