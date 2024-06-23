@@ -59,7 +59,7 @@ def extract_text(id, url, by_type, identifier):
 # Rest of the code remains the same
 
 
-columnas = ['id', 'Empresa', 'producto', 'link', 'xpath']
+columnas = ['id', 'empresa', 'producto', 'link', 'xpath']
 
 links_product = [
     ['1','Jumbo','azucar', 'https://www.jumbo.com.ar/azucar/azucar-y-edulcorantes?map=ft,sub-categoria', '//*[@id="gallery-layout-container"]/div[2]/section/a/article/div[5]/div/div/div/div[1]/div/span/div/div'],
