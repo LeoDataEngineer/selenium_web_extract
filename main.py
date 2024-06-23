@@ -95,7 +95,7 @@ print(df)
 # Hacer el merge de los DataFrames en función de la columna 'id'
 df_final = pd.merge(df, info, on='id')
 # Nuevo orden de columnas
-columnas_reordenadas = ['id', 'Empresa', 'producto', 'precio', 'link', 'xpath']
+columnas_reordenadas = ['id', 'empresa', 'producto', 'precio', 'link', 'xpath']
 
 # Crear un nuevo DataFrame con las columnas reordenadas
 df_final = df_final[columnas_reordenadas]
