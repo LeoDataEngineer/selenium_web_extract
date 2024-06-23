@@ -11,7 +11,7 @@ def conectar_mysql():
             password=os.environ['MYSQL_PASSWORD'],
             host=os.environ['MYSQL_HOST'],
             database=os.environ['MYSQL_DATABASE'],
-            port=14004
+            port=14004  # Asegúrate de que este es el puerto correcto
         )
         print("Conexión a MySQL exitosa.")
         return conn
@@ -25,25 +25,21 @@ def conectar_mysql():
         return None
 
 def crear_tabla(conn):
-    """Crea la tabla 'subtedata' si no existe"""
+    """Crea la tabla 'producto' si no existe"""
     cursor = conn.cursor()
     try:
-        # Primero, intenta eliminar la tabla si existe
-        # cursor.execute("CREATE TABLE IF NOT EXISTS producto")
-        # Luego, crea la nueva tabla
         cursor.execute("""
-                    CREATE TABLE IF NOT EXISTS producto (
-                        id_producto INT AUTO_INCREMENT PRIMARY KEY,
-                        id_registro INT,
-                        Empresa VARCHAR(100),
-                        producto INT,
-                        precio FLOAT,
-                        link VARCHAR(2000),
-                        xpath VARCHAR(2000),
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )
-                    """)
-        # Confirma los cambios
+            CREATE TABLE IF NOT EXISTS producto (
+                id_producto INT AUTO_INCREMENT PRIMARY KEY,
+                id_registro INT,
+                Empresa VARCHAR(100),
+                producto INT,
+                precio FLOAT,
+                link VARCHAR(2000),
+                xpath VARCHAR(2000),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
         conn.commit()
         print("Tabla 'producto' creada exitosamente.")
     except mysql.connector.Error as err:
@@ -55,17 +51,13 @@ def cargar_datos_db(conn, df):
     """Carga datos desde un DataFrame de pandas a la tabla 'producto' en MySQL"""
     cursor = conn.cursor()
     try:
-        # Convertir el DataFrame de pandas en una lista de tuplas para la inserción
         data = [tuple(row) for row in df.values]
-        # Preparar la consulta de inserción
         insert_query = """
-                        INSERT INTO producto
-                        (id_registro, Empresa, producto, link, xpath)
-                        VALUES (%s, %s, %s, %s, %s)
-                        """
-        # Insertar los datos en lotes para mejorar el rendimiento
+            INSERT INTO producto
+            (id_registro, Empresa, producto, precio, link, xpath)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """
         cursor.executemany(insert_query, data)
-        # Confirmar los cambios
         conn.commit()
         print("Datos cargados en MySQL.")
     except mysql.connector.Error as err:
@@ -78,14 +70,9 @@ def main():
     conn = conectar_mysql()
     if conn:
         crear_tabla(conn)
-        
-        # Asumiendo que 'productos.csv' es el archivo con los datos extraídos
         df = pd.read_csv('productos.csv')
-        df.columns = df.columns.str.upper()
-
+        df.columns = df.columns.str.lower()  # Asegúrate de que los nombres de las columnas coinciden con los nombres en la tabla
         cargar_datos_db(conn, df)
-        
-        # Cerrar la conexión
         conn.close()
 
 if __name__ == "__main__":
