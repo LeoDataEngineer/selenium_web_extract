@@ -1,7 +1,7 @@
 import pandas as pd
 import mysql.connector
 from mysql.connector import errorcode
-import os 
+import os
 
 def conectar_mysql():
     """Función para conectar a MySQL"""
@@ -11,7 +11,7 @@ def conectar_mysql():
             password=os.environ['MYSQL_PASSWORD'],
             host=os.environ['MYSQL_HOST'],
             database=os.environ['MYSQL_DATABASE'],
-            port=14004  # Asegúrate de que este es el puerto correcto
+            port=3306  # Asegúrate de que este es el puerto correcto para MySQL
         )
         print("Conexión a MySQL exitosa.")
         return conn
@@ -33,7 +33,7 @@ def crear_tabla(conn):
                 id_producto INT AUTO_INCREMENT PRIMARY KEY,
                 id_registro INT,
                 Empresa VARCHAR(100),
-                producto INT,
+                producto VARCHAR(100),  # Cambia esto si 'producto' es un INT
                 precio FLOAT,
                 link VARCHAR(2000),
                 xpath VARCHAR(2000),
@@ -72,6 +72,8 @@ def main():
         crear_tabla(conn)
         df = pd.read_csv('productos.csv')
         df.columns = df.columns.str.lower()  # Asegúrate de que los nombres de las columnas coinciden con los nombres en la tabla
+        print("DataFrame cargado desde productos.csv:")
+        print(df.head())  # Imprime los primeros registros del DataFrame para verificar los datos
         cargar_datos_db(conn, df)
         conn.close()
 
