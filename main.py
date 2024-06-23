@@ -63,6 +63,7 @@ columnas = ['id', 'Empresa', 'producto', 'link', 'xpath']
 
 links_product = [
     ['1','Jumbo','azucar', 'https://www.jumbo.com.ar/azucar/azucar-y-edulcorantes?map=ft,sub-categoria', '//*[@id="gallery-layout-container"]/div[2]/section/a/article/div[5]/div/div/div/div[1]/div/span/div/div'],
+    ['2', 'Coto', 'azucar','https://www.cotodigital3.com.ar/sitios/cdigi/producto/-azucar-azucel-1kg/_/A-00298412-00298412-200', '/html/body/div[5]/div[2]/div/div/div/div/div[2]/div[2]/div/div[3]/span[2]/span'],
     ['3', 'Disco', 'azucar', 'https://www.disco.com.ar/azucar?_q=azucar&map=ft&page=1', '/html/body/div[2]/div/div[1]/div/div[10]/div/div[2]/section/div[2]/div/div[4]/section/div/div/div/div/div[2]/div/div[3]/div/div/div/div/div[1]/section/a/article/div[5]/div/div/div/div[1]/div/span/div/div'],
     ['4', 'Dia', 'azucar', 'https://diaonline.supermercadosdia.com.ar/az%C3%BAcares?_q=az%C3%BAcares&map=ft', '/html/body/div[2]/div/div[1]/div/div[3]/div/div/section/div[2]/div/div[3]/section/div/div[3]/div/div[3]/div/div/div/div/div[5]/section/a/article/div/div/div[5]/div/div/div[1]/span/span/span'],
     ['5', 'Carrefour', 'azucar', 'https://www.carrefour.com.ar/azucar-comun-tipo-a-bella-vista-1-kg-421740/p', '/html/body/div[3]/div/div[1]/div/div/div/div[5]/div/div[2]/div[3]/section/div/div[2]/div/div[10]/div/div/div/div/div/div[2]/div/div/div[1]/div/div[1]/span/span/span[1]']
