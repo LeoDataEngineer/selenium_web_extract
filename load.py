@@ -24,7 +24,7 @@ def conectar_mysql():
             print(err)
         return None
 
-def crear_tabla_producto(conn):
+def crear_tabla(conn):
     """Crea la tabla 'subtedata' si no existe"""
     cursor = conn.cursor()
     try:
@@ -51,7 +51,7 @@ def crear_tabla_producto(conn):
     finally:
         cursor.close()
 
-def cargar_datos_db_subte(conn, df):
+def cargar_datos_db(conn, df):
     """Carga datos desde un DataFrame de pandas a la tabla 'producto' en MySQL"""
     cursor = conn.cursor()
     try:
@@ -77,13 +77,13 @@ def cargar_datos_db_subte(conn, df):
 def main():
     conn = conectar_mysql()
     if conn:
-        crear_tabla_subte(conn)
+        crear_tabla(conn)
         
         # Asumiendo que 'productos.csv' es el archivo con los datos extraídos
         df = pd.read_csv('productos.csv')
         df.columns = df.columns.str.upper()
 
-        cargar_datos_db_subte(conn, df)
+        cargar_datos_db(conn, df)
         
         # Cerrar la conexión
         conn.close()
