@@ -11,7 +11,7 @@ def conectar_mysql():
             password=os.environ['MYSQL_PASSWORD'],
             host=os.environ['MYSQL_HOST'],
             database=os.environ['MYSQL_DATABASE'],
-            port=3306  # Asegúrate de que este es el puerto correcto para MySQL
+            port=14004  
         )
         print("Conexión a MySQL exitosa.")
         return conn
@@ -31,9 +31,9 @@ def crear_tabla(conn):
         cursor.execute("DROP TABLE IF EXISTS producto")
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS producto (
-                id_producto INT AUTO_INCREMENT PRIMARY KEY,
+                id_autoincremt INT AUTO_INCREMENT PRIMARY KEY,
                 id INT,
-                Empresa VARCHAR(100),
+                empresa VARCHAR(100),
                 producto VARCHAR(100),  
                 precio FLOAT,
                 link VARCHAR(2000),
@@ -55,7 +55,7 @@ def cargar_datos_db(conn, df):
         data = [tuple(row) for row in df.values]
         insert_query = """
             INSERT INTO producto
-            (id_registro, Empresa, producto, precio, link, xpath)
+            (id, empresa, producto, precio, link, xpath)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
         cursor.executemany(insert_query, data)
