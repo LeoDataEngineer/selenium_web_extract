@@ -59,7 +59,7 @@ def cargar_datos_db(conn, df):
         data = [tuple(row) for row in df.values]
         # Preparar la consulta de inserción
         insert_query = """
-                        INSERT INTO subtedata
+                        INSERT INTO producto
                         (id_registro, Empresa, producto, link, xpath)
                         VALUES (%s, %s, %s, %s, %s)
                         """
