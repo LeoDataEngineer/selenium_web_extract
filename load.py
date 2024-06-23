@@ -32,7 +32,7 @@ def crear_tabla(conn):
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS producto (
                 id_producto INT AUTO_INCREMENT PRIMARY KEY,
-                id_registro INT,
+                id INT,
                 Empresa VARCHAR(100),
                 producto VARCHAR(100),  
                 precio FLOAT,
