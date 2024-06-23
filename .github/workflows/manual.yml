@@ -27,19 +27,31 @@ jobs:
         run: |
           python main.py
 
-      - name: Mover productos.csv al directorio data
-        run: |
-          mv productos.csv data/
+      - name: Subir datos d
+        uses: actions/upload-artifact@v4
+        with:
+          name: productos
+          path: productos.csv
 
-      - name: Configurar Git
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      
-      - name: Subir productos.csv al repositorio
-        env:
-          ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
-        run: |
-          git add data/productos.csv
-          git commit -m 'Agregar productos.csv'
-          git push https://x-access-token:${{ secrets.ACTIONS_PAT }}@github.com/LeoDataEngineer/selenium_web_extract.git
+
+  load:
+        runs-on: ubuntu-latest
+        needs: extract
+        steps: 
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: '3.10' 
+                cache: 'pip' # caching pip dependencies
+            - run: pip install -r requirements.txt
+            - name: Download users data from Extract Job
+              uses: actions/download-artifact@v4
+              with:
+                name:  enviar tabla productos a aiven 
+            - name: Subir datos a mysql
+              run: python load.py
+              env:
+                MYSQL_USER: ${{ secrets.MYSQL_USER }}
+                MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+                MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+                MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}        
