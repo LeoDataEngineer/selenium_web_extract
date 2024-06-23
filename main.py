@@ -23,12 +23,12 @@ def extract_text(id, url, by_type, identifier):
 
     # Iniciar el navegador
     driver = webdriver.Chrome(service=service, options=chrome_options)
-
+    time.sleep(3)
     try:
         # Navegar a la página web
         print(f"Navegando a la URL: {url}")
         driver.get(url)
-        
+        time.sleep(3)
         # Hacer scroll hacia abajo para cargar el contenido si es necesario
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(3)
@@ -41,7 +41,7 @@ def extract_text(id, url, by_type, identifier):
         # Extraer datos utilizando el tipo de localización y el identificador proporcionado
         element = driver.find_element(by_type, identifier)
         print(f"Elemento encontrado: {element}")
-
+        time.sleep(3)
         # Obtener el texto del elemento
         text = element.text
         print(f"Texto encontrado para {id}: {text}")
