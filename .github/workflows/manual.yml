@@ -24,45 +24,50 @@ jobs:
           pip install -r requirements.txt
       
       - name: Ejecutar script de extracción
-        run: python main.py
+        run: |
+          mkdir -p data_set
+          python main.py
+      - name: Move data_snow.csv to data_snow directory
+        run: |
+          mv producto.csv data_snow/
+          
+      # - name: Subir datos
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: productos
+      #     path: productos.csv
 
-      - name: Subir datos
-        uses: actions/upload-artifact@v4
-        with:
-          name: productos
-          path: productos.csv
-
-  read_save_repo:
-      runs-on: ubuntu-latest
-      needs: extract
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-python@v5
-          with:
-            python-version: '3.10'
-            cache: 'pip' # caching pip dependencies
-        - run: pip install -r requirements.txt
-        # Paso para descargar el artefacto
-        - name: Download artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: productos
-            path: productos
+  # read_save_repo:
+  #     runs-on: ubuntu-latest
+  #     needs: extract
+  #     steps:
+  #       - uses: actions/checkout@v4
+  #       - uses: actions/setup-python@v5
+  #         with:
+  #           python-version: '3.10'
+  #           cache: 'pip' # caching pip dependencies
+  #       - run: pip install -r requirements.txt
+  #       # Paso para descargar el artefacto
+  #       - name: Download artifact
+  #         uses: actions/download-artifact@v4
+  #         with:
+  #           name: productos
+  #           path: productos
   
-        # Paso para agregar y subir el archivo CSV al repositorio
-        - name: Add and commit CSV file
-          run: |-
-            git config user.name "Automated"
-            git config user.email "actions@users.noreply.github.com"
-            git add productos
-            git commit -m "Add productos.csv"
-            timestamp=$(date -u)
-            git diff --quiet && git diff --cached --quiet || git commit -m "Latest data: ${timestamp}" && git push origin main
-          #   git config --local user.email "action@github.com"
-          #   git config --local user.name "Automated"
-          #   git add data_snow
-          #   git commit -m "Add data_snow.csv"
-          #   git push origin HEAD:main
+  #       # Paso para agregar y subir el archivo CSV al repositorio
+  #       - name: Add and commit CSV file
+  #         run: |-
+  #           git config user.name "Automated"
+  #           git config user.email "actions@users.noreply.github.com"
+  #           git add productos
+  #           git commit -m "Add productos.csv"
+  #           timestamp=$(date -u)
+  #           git diff --quiet && git diff --cached --quiet || git commit -m "Latest data: ${timestamp}" && git push origin main
+  #         #   git config --local user.email "action@github.com"
+  #         #   git config --local user.name "Automated"
+  #         #   git add data_snow
+  #         #   git commit -m "Add data_snow.csv"
+  #         #   git push origin HEAD:main
 
                  
 
