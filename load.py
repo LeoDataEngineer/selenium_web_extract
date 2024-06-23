@@ -27,6 +27,7 @@ def conectar_mysql():
 def crear_tabla(conn):
     """Crea la tabla 'producto' si no existe"""
     cursor = conn.cursor()
+    cursor.execute(""" DROP ABLE IF EXISTS producto   """
     try:
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS producto (
