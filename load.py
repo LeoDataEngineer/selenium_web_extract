@@ -27,14 +27,14 @@ def conectar_mysql():
 def crear_tabla(conn):
     """Crea la tabla 'producto' si no existe"""
     cursor = conn.cursor()
-    cursor.execute(""" DROP ABLE IF EXISTS producto   """
     try:
+        cursor.execute("DROP TABLE IF EXISTS producto")
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS producto (
                 id_producto INT AUTO_INCREMENT PRIMARY KEY,
                 id_registro INT,
                 Empresa VARCHAR(100),
-                producto VARCHAR(100),  # Cambia esto si 'producto' es un INT
+                producto VARCHAR(100),  
                 precio FLOAT,
                 link VARCHAR(2000),
                 xpath VARCHAR(2000),
