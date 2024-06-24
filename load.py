@@ -28,7 +28,7 @@ def crear_tabla(conn):
     """Crea la tabla 'producto' si no existe"""
     cursor = conn.cursor()
     try:
-        cursor.execute("DROP TABLE IF EXISTS producto")
+        # cursor.execute("DROP TABLE IF EXISTS producto")
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS producto (
                 id_autoincremt INT AUTO_INCREMENT PRIMARY KEY,
